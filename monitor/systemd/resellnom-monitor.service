@@ -1,0 +1,23 @@
+[Unit]
+Description=ResellNom Server Monitor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=resellnom-monitor
+Group=resellnom-monitor
+WorkingDirectory=/opt/resellnom-monitor
+EnvironmentFile=/etc/resellnom-monitor.env
+ExecStart=/usr/bin/node /opt/resellnom-monitor/server.js
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/resellnom-monitor/data
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target
